@@ -1,0 +1,25 @@
+./mync -e "./ttt 123456789" -i TCPS4050
+./mync -e "./ttt 123456789" -o TCPClocalhost,4050 
+./mync -e "./ttt 123456789" -o TCPS4050
+
+./mync -e "./ttt 123456789" -o TCPC4050   //shuold ip
+
+
+./mync -e "./ttt 123456789" -i TCPS4150 -o TCPClocalhost,4152
+
+./mync -e "./ttt 123456789" -i TCPS4150 -o TCPClocalhost,4152
+
+
+./mync -e "./ttt 123456789" -i TCPS4150 -o 127.0.0.1,4150
+ nc -l -p 4152
+ nc localhost 4150
+
+ ./mync -i TCPS4150 -o TCPClocalhost,4152
+
+ ./mync -e "./ttt 123456789" -i TCPS4158 -o TCPClocalhost,4152
+
+
+# server
+./mync -e "./ttt 123456789" -b TCPS4269
+# client
+./mync -b TCPClocalhost,4269

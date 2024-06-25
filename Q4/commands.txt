@@ -1,0 +1,1 @@
+./mync -e "./ttt 123456789" -i UDPS4050 -t 10 || nc -u localhost 4050
