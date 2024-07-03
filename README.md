@@ -61,7 +61,7 @@ playing ttt using TCP:
 using UDP:
 ```sh
 ./mync -e "./ttt 123456789" -i UDPS4269  
-./mync -e "./ttt 123456789" -o UDPC4269
+./mync -e "./ttt 123456789" -o UDPS4269
 ./mync -e "./ttt 123456789" -b UDPS4269
 ```
 Client:
@@ -74,9 +74,22 @@ using UDS: opening a chat portal
 ./mync -i UDSSSmyserver.sock 
 ./mync -e "./ttt 123456789" -i UDSSSmyserver.sock
 ```
+note that after creating uds we need to remove the socket file. (myserver.sock)
 Client:
 ```sh
 nc -U myserver.sock
+```
+
+
+```sh
+# open udp server in port 1234
+nc -u -l -p 1234
+
+# open udp client that connects to the server, and open UDS stream server in server.sock
+./mync -e "./ttt 123456789" -i UDSSSserver.sock -o UDPC127.0.0.1,1234
+
+# open UDS stream client that connects to the server
+nc -U server.sock
 ```
 
 ### Function Descriptions
