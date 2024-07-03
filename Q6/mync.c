@@ -152,6 +152,11 @@ int UDP_SERVER_PORT(int port){
         exit(1);
     }    
 
+    // connect to the client to save the address
+    if (connect(sockfd, (struct sockaddr*)&client_addr, sizeof(client_addr)) < 0) {
+        perror("connect");
+        exit(1);
+    }
     return sockfd;
 }
 
@@ -448,6 +453,16 @@ int main(int argc, char* argv[]) {
             char *port_str = strtok(NULL, ",");
             int port = atoi(port_str);
             int res_fd = UDP_CLIENT_PORT(ip, port);
+            inputFD = res_fd;
+            outputFD = res_fd;
+        }else if(strncmp(B, "UDSSD", 5) == 0){
+            B += 5;
+            int res_fd = UDS_SERVER_DATAGRAM(B);
+            inputFD = res_fd;
+            outputFD = res_fd;
+        }else if(strncmp(B, "UDSSS", 5) == 0){
+            B += 5;
+            int res_fd = UDS_SERVER_STREAM(B);
             inputFD = res_fd;
             outputFD = res_fd;
         }
